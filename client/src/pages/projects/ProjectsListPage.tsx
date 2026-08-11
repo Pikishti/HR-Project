@@ -56,12 +56,17 @@ function NewProjectModal({ onClose }: { onClose: () => void }) {
             ))}
           </div>
         </div>
+        {createProject.isError && (
+          <p className="text-sm text-red-600">
+            {createProject.error instanceof Error ? createProject.error.message : "No se pudo crear el proyecto. Intenta de nuevo."}
+          </p>
+        )}
         <button
           type="submit"
           disabled={createProject.isPending}
           className="self-end bg-indigo-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
         >
-          Create project
+          {createProject.isPending ? "Creating..." : "Create project"}
         </button>
       </form>
     </Modal>
